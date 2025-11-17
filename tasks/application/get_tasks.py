@@ -1,7 +1,7 @@
 from tasks.infrastracture.data import get_tasks_records
 
-def get_tasks():
-    tasks = get_tasks_records()
+def get_tasks(path):
+    tasks = get_tasks_records(path)
 
     if len(tasks) > 0:
         for i, task in enumerate(tasks):

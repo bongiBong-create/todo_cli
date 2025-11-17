@@ -1,1 +1,0 @@
-from tasks.presentation.cli import start_cli
