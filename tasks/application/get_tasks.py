@@ -1,12 +1,15 @@
 from tasks.infrastracture.data import get_tasks_records
+from shared.utils import filter_tasks
+from shared.utils import print_tasks
 
-def get_tasks(path):
+def get_tasks(path, category):
     tasks = get_tasks_records(path)
 
     if len(tasks) > 0:
-        for i, task in enumerate(tasks):
-            print(f"Задача №{i + 1}\n"
-                  f"Название: {task['title']}\n"
-                  f"Статус: {'\u2714' if task['done'] else '\u2717'}")
+        if len(category) == 0 or category == "все":
+            print_tasks(tasks)
+        else:
+            tasks = filter_tasks(tasks, category)
+            print_tasks(tasks)
     else:
         print("Список пуст, добавьте задачи")
