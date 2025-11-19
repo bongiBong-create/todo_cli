@@ -6,7 +6,7 @@ def get_tasks(path, category):
     tasks = get_tasks_records(path)
 
     if len(tasks) > 0:
-        if len(category) == 0 or category == "все":
+        if len(category) == 0 or category == "общие":
             print_tasks(tasks)
         else:
             tasks = filter_tasks(tasks, category)

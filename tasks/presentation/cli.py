@@ -1,10 +1,11 @@
+from tasks.infrastracture.storage import init_path
+from tasks.infrastracture.storage import init_storage
+from tasks.infrastracture.data import get_categories
 from tasks.application.add_task import add_task
 from tasks.application.delete_task import delete_task
 from tasks.application.get_tasks import get_tasks
 from tasks.application.marked_task import marked_task
 from tasks.domain.validators import check_index
-from tasks.infrastracture.storage import init_path
-from tasks.infrastracture.storage import init_storage
 
 def start_cli():
     path = init_path()
@@ -21,7 +22,7 @@ def start_cli():
 
     while True:
         command = input("Введите команду: (введите help для списка команд)\n").strip().lower()
-
+        categories = get_categories(category_path)
         match command:
             case "добавить":
                 name = input("Введите название задачи\n")
@@ -31,10 +32,10 @@ def start_cli():
                     index = input("Введите номер задачи\n")
                     is_index = check_index(index)
                     if is_index is not None:
-                        delete_task(is_index, path)
+                        delete_task(is_index, path, category_path)
             case "задачи":
                 category = input("Введите группу задач\n"
-                                 "Доступные: Общие\n")
+                                 f"Доступные: Общие/{"/".join(categories)}\n")
                 get_tasks(path, category)
             case "отметить":
                     index = input("Введите номер задачи, которую выполнили\n")
